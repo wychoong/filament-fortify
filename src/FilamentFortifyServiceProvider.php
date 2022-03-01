@@ -86,6 +86,10 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
             });
         }
 
+        Fortify::confirmPasswordView(function () {
+            return app()->call(Auth\PasswordConfirmation::class);
+        });
+    
         Route::domain(config('filament.domain'))
             ->middleware(config('filament.middleware.base'))
             ->name('filament.')
