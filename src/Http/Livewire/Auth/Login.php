@@ -3,15 +3,14 @@
 namespace WyChoong\FilamentFortify\Http\Livewire\Auth;
 
 use Filament\Facades\Filament;
-use Filament\Http\Livewire\Auth\Login as BasePage;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
+use Filament\Http\Livewire\Auth\Login as BasePage;
 use Illuminate\Contracts\View\View;
 use Laravel\Fortify\Features;
 
 class Login extends BasePage
 {
-
     public $email = '';
 
     public $resetPasswordEnabled = false;

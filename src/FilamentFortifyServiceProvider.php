@@ -2,26 +2,25 @@
 
 namespace WyChoong\FilamentFortify;
 
+use Filament\PluginServiceProvider;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use Laravel\Fortify\Features;
+use Laravel\Fortify\Fortify;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use WyChoong\FilamentFortify\Commands\FilamentFortifyCommand;
+
+
+
+use WyChoong\FilamentFortify\Http\Livewire\Auth;
 use WyChoong\FilamentFortify\Http\Livewire\Auth\Login;
-use Filament\PluginServiceProvider;
-use Livewire\Livewire;
-use Illuminate\Support\Facades\App;
-use Laravel\Fortify\Fortify;
+
 use WyChoong\FilamentFortify\Http\Livewire\Auth\PasswordReset;
 use WyChoong\FilamentFortify\Http\Livewire\Auth\Register;
 use WyChoong\FilamentFortify\Http\Livewire\Auth\RequestPasswordReset;
-
-
-
-use Illuminate\Support\Facades\Route;
-use WyChoong\FilamentFortify\Http\Livewire\Auth;
-
 use WyChoong\FilamentFortify\Http\Responses\LoginResponse;
-use Illuminate\Support\Facades\Redirect;
-use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
-use Laravel\Fortify\Features;
 
 class FilamentFortifyServiceProvider extends PluginServiceProvider
 {
@@ -88,7 +87,7 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
         Fortify::confirmPasswordView(function () {
             return app()->call(Auth\PasswordConfirmation::class);
         });
-    
+
         Route::domain(config('filament.domain'))
             ->middleware(config('filament.middleware.base'))
             ->name('filament.')

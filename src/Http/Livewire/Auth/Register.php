@@ -2,20 +2,20 @@
 
 namespace WyChoong\FilamentFortify\Http\Livewire\Auth;
 
-use Livewire\Component;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
-
 use Filament\Facades\Filament;
+
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-
-use Illuminate\Contracts\View\View;
 use Illuminate\Auth\Events\Registered;
 
-use Laravel\Fortify\Contracts\RegisterResponse;
+use Illuminate\Contracts\View\View;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+
+use Laravel\Fortify\Contracts\RegisterResponse;
+use Livewire\Component;
 
 class Register extends Component implements HasForms
 {

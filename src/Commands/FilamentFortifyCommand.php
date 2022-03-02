@@ -3,9 +3,8 @@
 namespace WyChoong\FilamentFortify\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Str;
 
 class FilamentFortifyCommand extends Command
 {
@@ -22,6 +21,7 @@ class FilamentFortifyCommand extends Command
 
         $this->comment('All done');
         $this->warn('Don\'t forget to run `php artisan migrate`');
+
         return self::SUCCESS;
     }
 
@@ -29,7 +29,7 @@ class FilamentFortifyCommand extends Command
     {
         $appConfig = file_get_contents(config_path('app.php'));
 
-        if (!Str::contains($appConfig, 'App\\Providers\\FortifyServiceProvider::class')) {
+        if (! Str::contains($appConfig, 'App\\Providers\\FortifyServiceProvider::class')) {
             $this->line('Adding FortifyServiceProvider to config/app.php');
             File::put(
                 config_path('app.php'),
@@ -40,6 +40,8 @@ class FilamentFortifyCommand extends Command
                 )
             );
             $this->info('FortifyServiceProvider configured');
-        } else $this->line('FortifyServiceProvider already configured');
+        } else {
+            $this->line('FortifyServiceProvider already configured');
+        }
     }
 }
