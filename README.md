@@ -71,6 +71,15 @@ To allow user access only after email verified, enable the feature in config/for
     ],
     // ...
 ]
+
+## update your User model
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
+{
+    // ...
+}
 ```
 
 #### Password Confirmation
@@ -80,7 +89,18 @@ protected static string | array $middlewares = ['password.confirm'];
 ```
 to relevant Page/Resource.
 
-#### 2FA Page
+#### 2FA
+Update your User model
+```php
+use Laravel\Fortify\TwoFactorAuthenticatable;
+
+class User extends Authenticatable implements FilamentUser
+{
+    // ...
+    use TwoFactorAuthenticatable;
+    // ...
+}
+```
 A simple enable/disable user's 2fa page is included. 
 
 You can change the page's title, navigation group, navigation label in service provider:
