@@ -4,7 +4,7 @@ namespace WyChoong\FilamentFortify;
 
 class FilamentFortify
 {
-    protected static string $title = '';
+    protected static string $pageTitle = '';
 
     protected static string $navigationGroup = '';
 
@@ -24,9 +24,9 @@ class FilamentFortify
         return filled(static::$navigationLabel) ? static::$navigationLabel : __('filament-fortify::two-factor.page.navigation-label');
     }
 
-    public static function title($title = null): string
+    public static function pageTitle($pageTitle = null): string
     {
-        if (filled($title)) static::$title = $title;
-        return filled(static::$title) ? static::$title : __('filament-fortify::two-factor.page.title');
+        if (filled($pageTitle)) static::$pageTitle = $pageTitle;
+        return filled(static::$pageTitle) ? static::$pageTitle : __('filament-fortify::two-factor.page.title');
     }
 }

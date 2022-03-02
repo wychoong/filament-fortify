@@ -36,7 +36,7 @@ class TwoFactor extends Page
     protected function getBreadcrumbs(): array
     {
         return [
-            url()->current() => FilamentFortify::title()
+            url()->current() => FilamentFortify::pageTitle()
         ];
     }
 
@@ -52,6 +52,6 @@ class TwoFactor extends Page
 
     protected function getTitle(): string
     {
-        return FilamentFortify::title();
+        return FilamentFortify::pageTitle();
     }
 }

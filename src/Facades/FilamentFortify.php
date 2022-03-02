@@ -5,7 +5,7 @@ namespace WyChoong\FilamentFortify\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static string title($title = null)
+ * @method static string pageTitle($pageTitle = null)
  * @method static string navigationGroup($navigationGroup = null)
  * @method static string navigationLabel($navigationLabel = null)
  * 
