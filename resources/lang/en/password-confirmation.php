@@ -20,5 +20,6 @@ return [
 
     'messages' => [
         'throttled' => 'Too many register attempts. Please try again in :seconds seconds.',
+        'confirmation' => 'Please confirm password before proceed',
     ],
 ];
