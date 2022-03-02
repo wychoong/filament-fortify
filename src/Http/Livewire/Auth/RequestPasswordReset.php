@@ -38,7 +38,7 @@ class RequestPasswordReset extends Component implements HasForms
                 ->label(__('filament-fortify::password-reset.fields.email.label'))
                 ->email()
                 ->required()
-                ->autocomplete()
+                ->autocomplete(),
         ];
     }
 

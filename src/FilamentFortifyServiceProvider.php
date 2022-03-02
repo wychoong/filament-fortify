@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Redirect;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
-use WyChoong\FilamentFortify\Facades\FilamentFortify;
 
 class FilamentFortifyServiceProvider extends PluginServiceProvider
 {

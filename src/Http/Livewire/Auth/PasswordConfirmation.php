@@ -40,7 +40,7 @@ class PasswordConfirmation extends Component implements HasForms
                 'title' => __('filament-fortify::password-confirmation.title'),
                 'breadcrumbs' => [
                     __('filament-fortify::password-confirmation.title'),
-                ]
+                ],
             ]);
     }
 }
