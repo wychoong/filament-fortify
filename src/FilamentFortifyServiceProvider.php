@@ -2,22 +2,21 @@
 
 namespace WyChoong\FilamentFortify;
 
+use Filament\PluginServiceProvider;
+
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+
+use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use Laravel\Fortify\Features;
+use Laravel\Fortify\Fortify;
+
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 
-use Filament\PluginServiceProvider;
-use Livewire\Livewire;
-
 use WyChoong\FilamentFortify\Commands\FilamentFortifyCommand;
-use WyChoong\FilamentFortify\Pages;
 use WyChoong\FilamentFortify\Http\Livewire\Auth;
 use WyChoong\FilamentFortify\Http\Responses\LoginResponse;
-
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Redirect;
-
-use Laravel\Fortify\Fortify;
-use Laravel\Fortify\Features;
-use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 
 class FilamentFortifyServiceProvider extends PluginServiceProvider
 {
@@ -90,7 +89,7 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
                 return app()->call(Auth\LoginTwoFactor::class);
             });
         }
-    
+
         Route::domain(config('filament.domain'))
             ->middleware(config('filament.middleware.base'))
             ->name('filament.')

@@ -3,12 +3,8 @@
 namespace WyChoong\FilamentFortify\Pages;
 
 use App\Models\User;
-use Closure;
 use Filament\Facades\Filament;
-use Filament\Forms\Components\TextInput;
 use Filament\Pages\Page;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
 use WyChoong\FilamentFortify\Facades\FilamentFortify;
 
 class TwoFactor extends Page
@@ -36,7 +32,7 @@ class TwoFactor extends Page
     protected function getBreadcrumbs(): array
     {
         return [
-            url()->current() => FilamentFortify::pageTitle()
+            url()->current() => FilamentFortify::pageTitle(),
         ];
     }
 
