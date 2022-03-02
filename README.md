@@ -1,3 +1,4 @@
+![](https://banners.beyondco.de/Filament%20Fortify.png?theme=light&packageManager=composer+require&packageName=wychoong%2Ffilament-fortify&pattern=skulls&style=style_2&description=Laravel+Fortify+for+Filament+Admin&md=1&showWatermark=1&fontSize=175px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg)
 # Laravel Fortify for Filament Admin
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wychoong/filament-fortify.svg?style=flat-square)](https://packagist.org/packages/wychoong/filament-fortify)
