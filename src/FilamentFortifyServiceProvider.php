@@ -63,7 +63,6 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
 
         $this->app->singleton(LoginResponseContract::class, LoginResponse::class);
 
-
         if (Features::enabled(Features::registration())) {
             Fortify::registerView(function () {
                 return app()->call(Auth\Register::class);

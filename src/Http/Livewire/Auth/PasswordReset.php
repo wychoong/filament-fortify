@@ -2,8 +2,6 @@
 
 namespace WyChoong\FilamentFortify\Http\Livewire\Auth;
 
-use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
-use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
@@ -15,7 +13,6 @@ use Livewire\Component;
 class PasswordReset extends Component implements HasForms
 {
     use InteractsWithForms;
-    use WithRateLimiting;
 
     public $email = '';
     public $password = '';
