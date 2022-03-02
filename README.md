@@ -1,68 +1,84 @@
-# :package_description
+# Laravel Fortify for Filament Admin
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/:vendor_slug/:package_slug/run-tests?label=tests)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/:vendor_slug/:package_slug/Check%20&%20fix%20styling?label=code%20style)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/wychoong/filament-fortify.svg?style=flat-square)](https://packagist.org/packages/wychoong/filament-fortify)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/wychoong/filament-fortify/run-tests?label=tests)](https://github.com/wychoong/filament-fortify/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/wychoong/filament-fortify/Check%20&%20fix%20styling?label=code%20style)](https://github.com/wychoong/filament-fortify/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/wychoong/filament-fortify.svg?style=flat-square)](https://packagist.org/packages/wychoong/filament-fortify)
 
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+This package provides the UI for using Fortify in Filament Admin Panel
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require wychoong/filament-fortify
 ```
 
-You can publish and run the migrations with:
+You can intallation command and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
+php artisan filament-fortify:install 
 php artisan migrate
 ```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag=":package_slug-config"
+The installation command does few things to speed up the installation process:
+```
+- Publish Fortify files
+- Publish Fortify migration
+- Add FortifyServiceProvider to config/app.php
 ```
 
-This is the contents of the published config file:
+**As this package is only providing UI for Fortify, kindly refer [Laravel Fortify](https://laravel.com/docs/9.x/fortify) documentation to setup, eg: User model.** 
 
-```php
-return [
-];
+## Optional
+
+You can publish filament-fortify config file with:
+
+```bash
+php artisan vendor:publish --tag="filament-fortify-config"
 ```
 
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-views"
+php artisan vendor:publish --tag="filament-fortify-views"
 ```
 
 ## Usage
 
+This package respect the features configured in config/fortify.php, refer [Laravel Fortify](https://laravel.com/docs/9.x/fortify) to enable/disable features.
+
+To make the installation seemless, the following configs are overrided in the package.
 ```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
+config([
+    ## override filament login page
+    'filament.auth.pages.login' => Auth\Login::class,
+    ## force fortify view enabled
+    'fortify.views' => true,
+    ## force fortify to use filament home_url
+    'fortify.home' => config('filament.home_url'),
+]);
+```
+
+#### 2FA Page
+A simple enable/disable user's 2fa page is included. 
+
+You can change the page's title, navigation group, navigation label in service provider:
+
+```php
+use WyChoong\FilamentFortify\Facades\FilamentFortify;
+
+public function boot()
+{
+    FilamentFortify::navigationGroup(__('your-nav-group'));
+    FilamentFortify::navigationLabel(__('your-nav-label'));
+    FilamentFortify::pageTitle(__('your-page-title'));
+}
+```
+
+To disable it, publish the config file and set:
+```php
+    'register-page' => false,
 ```
 
 ## Testing
@@ -85,7 +101,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [wychoong](https://github.com/wychoong)
 - [All Contributors](../../contributors)
 
 ## License
