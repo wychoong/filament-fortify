@@ -60,6 +60,26 @@ config([
 ]);
 ```
 
+#### Email Verification
+To allow user access only after email verified, enable the feature in config/fortify.php and update config/filament.php
+
+```php
+'middleware' => [
+    'auth' => [
+        // ...
+        'verified'
+    ],
+    // ...
+]
+```
+
+#### Password Confirmation
+To request user password confirmation before access a Page/Resource, add 
+```php
+protected static string | array $middlewares = ['password.confirm'];
+```
+to relevant Page/Resource.
+
 #### 2FA Page
 A simple enable/disable user's 2fa page is included. 
 
