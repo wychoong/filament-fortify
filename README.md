@@ -7,6 +7,21 @@
 
 This package provides the UI for using Fortify in Filament Admin Panel
 
+## Screenshots
+_Login_
+![Screenshot of Login Screen](./screenshots/login.png)
+_Register_
+![Screenshot of Register Screen](./screenshots/register.png)
+_Email Verification_
+![Screenshot of Register Screen](./screenshots/email-verification.png)
+_Forgot Password_
+![Screenshot of Forgot Password Screen](./screenshots/forgot-password.png)
+_Two Factor Login_
+![Screenshot of 2fa Login Screen](./screenshots/2fa-login.png)
+_Two Factor Page_
+![Screenshot of 2fa Page Screen](./screenshots/2fa-page.png)
+_Password Confirmation_
+![Screenshot of Password Confirmation Screen](./screenshots/confirm-password.png)
 ## Installation
 
 You can install the package via composer:
@@ -61,6 +76,7 @@ config([
 ```
 
 #### Email Verification
+![Screenshot of Email Verification Screen](./screenshots/email-verification.png)
 To allow user access only after email verified, enable the feature in config/fortify.php and update config/filament.php
 
 ```php
@@ -83,6 +99,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 ```
 
 #### Password Confirmation
+![Screenshot of Password Confirmation Screen](./screenshots/confirm-password.png)
+
 To request user password confirmation before access a Page/Resource, add 
 ```php
 protected static string | array $middlewares = ['password.confirm'];
