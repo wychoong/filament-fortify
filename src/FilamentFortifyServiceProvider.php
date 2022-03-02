@@ -3,25 +3,22 @@
 namespace WyChoong\FilamentFortify;
 
 use Spatie\LaravelPackageTools\Package;
-use WyChoong\FilamentFortify\Commands\FilamentFortifyCommand;
-use WyChoong\FilamentFortify\Http\Livewire\Auth\Login;
+
 use Filament\PluginServiceProvider;
 use Livewire\Livewire;
-use Illuminate\Support\Facades\App;
-use Laravel\Fortify\Fortify;
-use WyChoong\FilamentFortify\Http\Livewire\Auth\PasswordReset;
-use WyChoong\FilamentFortify\Http\Livewire\Auth\Register;
-use WyChoong\FilamentFortify\Http\Livewire\Auth\RequestPasswordReset;
 
-
+use WyChoong\FilamentFortify\Commands\FilamentFortifyCommand;
+use WyChoong\FilamentFortify\Pages;
+use WyChoong\FilamentFortify\Http\Livewire\Auth;
+use WyChoong\FilamentFortify\Http\Responses\LoginResponse;
 
 use Illuminate\Support\Facades\Route;
-use WyChoong\FilamentFortify\Http\Livewire\Auth;
-
-use WyChoong\FilamentFortify\Http\Responses\LoginResponse;
 use Illuminate\Support\Facades\Redirect;
-use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+
+use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Features;
+use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use WyChoong\FilamentFortify\Facades\FilamentFortify;
 
 class FilamentFortifyServiceProvider extends PluginServiceProvider
 {
@@ -33,19 +30,19 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
         * More info: https://github.com/spatie/laravel-package-tools
         */
 
-        ## override filament login page
-        config(['filament.auth.pages.login' => Login::class]);
-
         config([
+            ## override filament login page
+            'filament.auth.pages.login' => Auth\Login::class,
             ## force fortify view enabled
             'fortify.views' => true,
             ## force fortify to use filament home_url
             'fortify.home' => config('filament.home_url'),
         ]);
 
-        Livewire::component(Register::getName(), Register::class);
-        Livewire::component(PasswordReset::getName(), PasswordReset::class);
-        Livewire::component(RequestPasswordReset::getName(), RequestPasswordReset::class);
+        Livewire::component(Auth\Register::getName(), Auth\Register::class);
+        Livewire::component(Auth\PasswordReset::getName(), Auth\PasswordReset::class);
+        Livewire::component(Auth\RequestPasswordReset::getName(), Auth\RequestPasswordReset::class);
+        Livewire::component(Pages\TwoFactor::getName(), Pages\TwoFactor::class);
 
         $package
             ->name('filament-fortify')
@@ -88,6 +85,12 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
         Fortify::confirmPasswordView(function () {
             return app()->call(Auth\PasswordConfirmation::class);
         });
+
+        if (Features::enabled(Features::twoFactorAuthentication())) {
+            Fortify::twoFactorChallengeView(function () {
+                return app()->call(Auth\LoginTwoFactor::class);
+            });
+        }
     
         Route::domain(config('filament.domain'))
             ->middleware(config('filament.middleware.base'))
@@ -98,5 +101,12 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
                         ->name('auth.login');
                 });
             });
+    }
+
+    protected function getPages(): array
+    {
+        return config('filament-fortify.register-page') ? [
+            Pages\TwoFactor::class,
+        ] : [];
     }
 }
