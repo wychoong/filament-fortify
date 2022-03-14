@@ -11,10 +11,10 @@
             <h2 class="font-bold tracking-tight text-center text-2xl">
                 {{ __('filament::login.heading') }}
                 @if ($registrationEnabled)
-                <p class="mt-2 text-sm text-center font-normal">
-                    {{__('filament-fortify::register.or')}} 
-                    <x-tables::link href="{{route('register')}}" >
-                        {{ __('filament-fortify::register.login-link') }}
+                    <p class="mt-2 text-sm text-center font-normal">
+                        {{__('filament-fortify::register.or')}}
+                        <x-tables::link href="{{route('register')}}" >
+                            {{ __('filament-fortify::register.login-link') }}
                         </x-table::link>
                     </p>
                 @endif
@@ -34,9 +34,9 @@
                 </div>
             @endif
         </form>
-        
+
         <x-filament::notification-manager />
-        
+
         <x-filament::footer />
     </div>
 </div>

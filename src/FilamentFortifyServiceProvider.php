@@ -95,6 +95,18 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
             ->middleware(config('filament.middleware.base'))
             ->name('filament.')
             ->group(function () {
+            /**
+             * We do not need to override logout response and logout path as:
+             * - logout response for both filament and fortify does
+             *    basically the same things except fortify handle for api calls
+             * - for api calls still can use POST fortify's /logout route
+             * - filament's logout route is at /filament/logout
+             */
+
+            /**
+             * Redeclare filament.auth.login route as fortify override it
+             * This route name is used multiple places in filament.
+             */
                 Route::prefix(config('filament.path'))->group(function () {
                     Route::get('/filament-login', fn () => Redirect::route('login'))
                         ->name('auth.login');
