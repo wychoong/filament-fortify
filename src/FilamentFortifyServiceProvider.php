@@ -4,9 +4,9 @@ namespace WyChoong\FilamentFortify;
 
 use Filament\PluginServiceProvider;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Arr;
 
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use Laravel\Fortify\Features;
@@ -16,7 +16,6 @@ use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 
 use WyChoong\FilamentFortify\Commands\FilamentFortifyCommand;
-use WyChoong\FilamentFortify\Http\Livewire\Auth;
 use WyChoong\FilamentFortify\Http\Responses\LoginResponse;
 
 class FilamentFortifyServiceProvider extends PluginServiceProvider
@@ -38,7 +37,6 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
 
     public function packageBooted(): void
     {
-
         $this->mergeConfigFrom(__DIR__ . '/../config/filament-fortify.php', 'filament-fortify');
 
         config([
@@ -123,11 +121,11 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
         $array = array_merge($original, $merging);
 
         foreach ($original as $key => $value) {
-            if (!is_array($value)) {
+            if (! is_array($value)) {
                 continue;
             }
 
-            if (!Arr::exists($merging, $key)) {
+            if (! Arr::exists($merging, $key)) {
                 continue;
             }
 
