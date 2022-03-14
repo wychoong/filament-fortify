@@ -154,6 +154,36 @@ To disable it, publish the config file and set:
     'register-page' => false,
 ```
 
+##Customization
+To use your own form, publish the config file and set your own livewire component
+```php
+# config/filament-fortify.php
+use App\Http\Livewire\Login;
+
+return [
+    // ...
+    'auth' => [
+        'login' =>  Login::class,
+        // ...
+    ],
+    // ...
+];
+
+# app/Http/Livewire/Login.php
+namespace App\Http\Livewire\Auth;
+
+use WyChoong\FilamentFortify\Http\Livewire\Auth\Login as BaseLogin;
+
+class Login extends BaseLogin{
+    
+    protected function getFormSchema(): array
+    {
+        return [
+            // your form schema
+        ];
+    }
+}
+```
 ## Testing
 
 ```bash

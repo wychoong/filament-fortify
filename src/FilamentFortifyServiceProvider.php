@@ -6,6 +6,7 @@ use Filament\PluginServiceProvider;
 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Arr;
 
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use Laravel\Fortify\Features;
@@ -27,21 +28,6 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
         *
         * More info: https://github.com/spatie/laravel-package-tools
         */
-
-        config([
-            ## override filament login page
-            'filament.auth.pages.login' => Auth\Login::class,
-            ## force fortify view enabled
-            'fortify.views' => true,
-            ## force fortify to use filament home_url
-            'fortify.home' => config('filament.home_url'),
-        ]);
-
-        Livewire::component(Auth\Register::getName(), Auth\Register::class);
-        Livewire::component(Auth\PasswordReset::getName(), Auth\PasswordReset::class);
-        Livewire::component(Auth\RequestPasswordReset::getName(), Auth\RequestPasswordReset::class);
-        Livewire::component(Pages\TwoFactor::getName(), Pages\TwoFactor::class);
-
         $package
             ->name('filament-fortify')
             ->hasConfigFile()
@@ -52,41 +38,58 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
 
     public function packageBooted(): void
     {
+
+        $this->mergeConfigFrom(__DIR__ . '/../config/filament-fortify.php', 'filament-fortify');
+
+        config([
+            ## override filament login page
+            'filament.auth.pages.login' => config('filament-fortify.auth.login'),
+            ## force fortify view enabled
+            'fortify.views' => true,
+            ## force fortify to use filament home_url
+            'fortify.home' => config('filament.home_url'),
+        ]);
+
+        Livewire::component(config('filament-fortify.auth.register')::getName(), config('filament-fortify.auth.register'));
+        Livewire::component(config('filament-fortify.auth.password-reset')::getName(), config('filament-fortify.auth.password-reset'));
+        Livewire::component(config('filament-fortify.auth.request-password-reset')::getName(), config('filament-fortify.auth.request-password-reset'));
+        Livewire::component(config('filament-fortify.pages.two-factor')::getName(), config('filament-fortify.pages.two-factor'));
+
         Fortify::loginView(function () {
-            return app()->call(Auth\Login::class);
+            return app()->call(config('filament-fortify.auth.login'));
         });
 
         $this->app->singleton(LoginResponseContract::class, LoginResponse::class);
 
         if (Features::enabled(Features::registration())) {
             Fortify::registerView(function () {
-                return app()->call(Auth\Register::class);
+                return app()->call(config('filament-fortify.auth.register'));
             });
         }
 
         if (Features::enabled(Features::resetPasswords())) {
             Fortify::requestPasswordResetLinkView(function () {
-                return app()->call(Auth\RequestPasswordReset::class);
+                return app()->call(config('filament-fortify.auth.request-password-reset'));
             });
 
             Fortify::resetPasswordView(function ($request) {
-                return app()->call(Auth\PasswordReset::class);
+                return app()->call(config('filament-fortify.auth.password-reset'));
             });
         }
 
         if (Features::enabled(Features::emailVerification())) {
             Fortify::verifyEmailView(function () {
-                return view('filament-fortify::verify-email');
+                return view(config('filament-fortify.view.verify-email'));
             });
         }
 
         Fortify::confirmPasswordView(function () {
-            return app()->call(Auth\PasswordConfirmation::class);
+            return app()->call(config('filament-fortify.auth.password-confirmation'));
         });
 
         if (Features::enabled(Features::twoFactorAuthentication())) {
             Fortify::twoFactorChallengeView(function () {
-                return app()->call(Auth\LoginTwoFactor::class);
+                return app()->call(config('filament-fortify.auth.login-two-factor'));
             });
         }
 
@@ -104,7 +107,37 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
     protected function getPages(): array
     {
         return config('filament-fortify.register-page') ? [
-            Pages\TwoFactor::class,
+            config('filament-fortify.pages.two-factor'),
         ] : [];
+    }
+
+    protected function mergeConfigFrom($path, $key): void
+    {
+        $config = $this->app['config']->get($key, []);
+
+        $this->app['config']->set($key, $this->mergeConfig(require $path, $config));
+    }
+
+    protected function mergeConfig(array $original, array $merging): array
+    {
+        $array = array_merge($original, $merging);
+
+        foreach ($original as $key => $value) {
+            if (!is_array($value)) {
+                continue;
+            }
+
+            if (!Arr::exists($merging, $key)) {
+                continue;
+            }
+
+            if (is_numeric($key)) {
+                continue;
+            }
+
+            $array[$key] = $this->mergeConfig($value, $merging[$key]);
+        }
+
+        return $array;
     }
 }
