@@ -92,6 +92,7 @@ config([
 
 #### Email Verification
 ![Screenshot of Email Verification Screen](./screenshots/email-verification.png)
+
 To allow user access only after email verified, enable the feature in config/fortify.php and update config/filament.php
 
 ```php
@@ -155,6 +156,7 @@ To disable it, publish the config file and set:
 ```
 
 ##Customization
+
 To use your own form, publish the config file and set your own livewire component
 ```php
 # config/filament-fortify.php
