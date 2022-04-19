@@ -155,7 +155,7 @@ To disable it, publish the config file and set:
     'register-page' => false,
 ```
 
-##Customization
+## Customization
 
 To use your own form, publish the config file and set your own livewire component
 ```php
