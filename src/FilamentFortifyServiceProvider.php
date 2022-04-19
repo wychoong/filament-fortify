@@ -46,6 +46,8 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
             'fortify.views' => true,
             ## force fortify to use filament home_url
             'fortify.home' => config('filament.home_url'),
+            ## mirror admin config
+            'forms.dark_mode' => config('filament.dark_mode'),
         ]);
 
         Livewire::component(config('filament-fortify.auth.register')::getName(), config('filament-fortify.auth.register'));
