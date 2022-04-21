@@ -186,6 +186,19 @@ class Login extends BaseLogin{
     }
 }
 ```
+
+### Theme
+Depends on your project setup, you might register the css file with `Filament::serving` as per [Filament Documentation](https://filamentphp.com/docs/2.x/admin/appearance#building-themes), then you need to publish the `fortify.config` and add `DispatchServingFilamentEvent::class` to the middleware for Fortify's routes.
+```php
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+
+return [
+    // ...
+    'middleware' => ['web', DispatchServingFilamentEvent::class],
+    //...
+];
+```
+
 ## Testing
 
 ```bash
