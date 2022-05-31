@@ -35,7 +35,7 @@
                                         >
                                             <span
                                                 class="text-sm font-medium leading-4 text-gray-700 dark:text-gray-300">
-                                                Confirm two factor code
+                                                {{__('filament-fortify::two-factor.messages.confirm-two-factor-code')}}
                                                 <sup class="font-medium text-danger-700">*</sup>
                                             </span>
                                         </label>

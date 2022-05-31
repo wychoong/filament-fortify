@@ -39,6 +39,7 @@ return [
         'enabled' => 'Two factor authentication has been enabled',
         'scan-qr' => 'Scan the following QR code using your phone\'s authenticator application',
         'store-recovery-code' => 'Store these recovery codes in a secure place to recover access to your account if your two factor authentication device is lost.',
+        'confirm-two-factor-code' => 'Confirm the two factor code by entering the temporary code from the authenticator application',
     ],
 
     'login' => [
