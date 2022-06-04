@@ -18,8 +18,6 @@ class TwoFactor extends Page
         mount as actionButtonsMount;
     }
 
-    protected static ?string $navigationIcon = "heroicon-o-document-text"; //config
-
     protected static string $view = "filament-fortify::filament.pages.two-factor";
 
     public function mount()
@@ -45,6 +43,11 @@ class TwoFactor extends Page
         ];
     }
 
+    protected static function getNavigationIcon(): string
+    {
+        return static::$navigationIcon ?? config('filament-fortify.navigation-icon', 'heroicon-o-key');
+    }
+
     protected static function getNavigationGroup(): ?string
     {
         return FilamentFortify::navigationGroup();
@@ -67,6 +70,6 @@ class TwoFactor extends Page
      */
     private function showTwoFactor(): bool
     {
-        return ! empty(Auth::user()->two_factor_secret);
+        return !empty(Auth::user()->two_factor_secret);
     }
 }
