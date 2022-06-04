@@ -20,6 +20,7 @@
                 @endif
             </h2>
 
+            {{ \Filament\Facades\Filament::renderHook('filament-fortify.login.start') }}
 
             @csrf
             {{ $this->form }}
@@ -33,6 +34,8 @@
                     <x-tables::link href="{{route('password.request')}}" >{{__('filament-fortify::password-reset.buttons.request.label')}}</x-table::link>
                 </div>
             @endif
+
+            {{ \Filament\Facades\Filament::renderHook('filament-fortify.login.end') }}
         </form>
 
         <x-filament::notification-manager />
