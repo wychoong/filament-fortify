@@ -1,4 +1,8 @@
 <x-filament::page>
+    @php
+        $buttons = $this->getCachedButtons();
+    @endphp
+
     @if($this->showTwoFactor())
         <div class="flex items-center justify-center ">
             <div class="p-2 max-w-md  ">
@@ -58,22 +62,14 @@
 
                         <x-slot name="footer">
                             <div class="flex justify-between">
-                                <x-filament::button type="button" color="danger" wire:click="disableTwoFactorAuthentication">
-                                    {{__("filament-fortify::two-factor.buttons.disable.label")}}
-                                </x-filament::button>
+                                {{ $buttons['disable'] }}
 
                                 @if($showingRecoveryCodes)
-                                    <x-filament::button type="button" color="secondary" wire:click="regenerateRecoveryCodes">
-                                        {{__("filament-fortify::two-factor.buttons.regenerate.label")}}
-                                    </x-filament::button>
+                                    {{ $buttons['regenerate'] }}
                                 @elseif($showingConfirmation)
-                                    <x-filament::button type="button" color="success" wire:click="confirmTwoFactorAuthentication">
-                                    {{__("filament-fortify::two-factor.buttons.enable.label")}}
-                                    </x-filament::button>
+                                    {{ $buttons['confirm'] }}
                                 @else
-                                    <x-filament::button type="button" color="secondary" wire:click="showRecoveryCodes">
-                                        {{__("filament-fortify::two-factor.buttons.show-recovery-code.label")}}
-                                    </x-filament::button>
+                                    {{ $buttons['show-recovery-code'] }}
                                 @endif
                             </div>
                         </x-slot>
@@ -84,8 +80,6 @@
         </div>
 
     @else
-        <x-filament::button type="button" wire:click="enableTwoFactorAuthentication">
-            {{__("filament-fortify::two-factor.buttons.enable.label")}}
-        </x-filament::button>
+        {{ $buttons['enable'] }}
     @endif
 </x-filament::page>

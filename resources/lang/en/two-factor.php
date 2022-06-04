@@ -5,10 +5,19 @@ return [
 
     'heading' => 'Reset password',
 
+    'confirm-password' => [
+        'modal-heading' => "Sensitive action",
+        'modal-subheading' => "Please confirm your password before proceed this action.",
+    ],
+
     'buttons' => [
 
         'enable' => [
             'label' => 'Enable two factor auth',
+        ],
+
+        'confirm' => [
+            'label' => 'Enable',
         ],
 
         'disable' => [
@@ -45,6 +54,10 @@ return [
         'code' => [
             'label' => 'OTP code',
         ],
+
+        'current_password' => [
+            'label' => 'Password',
+        ]
     ],
 
     'messages' => [
