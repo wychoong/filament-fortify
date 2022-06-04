@@ -22,4 +22,6 @@ return [
     'view' => [
         'verify-email' => 'filament-fortify::verify-email',
     ],
+
+    'navigation-icon' => 'heroicon-o-key',
 ];

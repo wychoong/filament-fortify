@@ -52,8 +52,8 @@ class Login extends BasePage
     public function render(): View
     {
         return view('filament-fortify::login')
-            ->layout('filament::components.layouts.base', [
-                'title' => __('filament::login.title'),
+            ->layout('filament::components.layouts.card', [
+                'title' => __('filament::login.heading'),
             ]);
     }
 }
