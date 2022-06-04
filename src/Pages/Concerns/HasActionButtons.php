@@ -2,18 +2,17 @@
 
 namespace WyChoong\FilamentFortify\Pages\Concerns;
 
+use Filament\Forms\Components\TextInput;
 use Filament\Pages\Actions\Action;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
-use Filament\Forms\Components\TextInput;
-use Laravel\Fortify\Actions\GenerateNewRecoveryCodes;
-use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\ConfirmTwoFactorAuthentication;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
+use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
+use Laravel\Fortify\Actions\GenerateNewRecoveryCodes;
 
 trait HasActionButtons
 {
-
     protected ?array $cachedButtons = null;
 
     protected function getCachedButtons(): array
@@ -43,7 +42,7 @@ trait HasActionButtons
 
     protected function getButtons(): array | View | null
     {
-        $confirmation = fn () => !$this->passwordIsConfirmed();
+        $confirmation = fn () => ! $this->passwordIsConfirmed();
 
         $confirmationForm = $confirmation() ? [
             TextInput::make("current_password")
@@ -52,7 +51,7 @@ trait HasActionButtons
                 ->required()
                 ->password()
                 ->inlineLabel()
-                ->rule("current_password")
+                ->rule("current_password"),
         ] : [];
 
         $buttons = [
@@ -88,7 +87,6 @@ trait HasActionButtons
                 ->form($confirmation() ? $confirmationForm : [])
                 ->color($buttonColor)
                 ->action(function ($data) use ($action) {
-
                     if (isset($data['current_password']) && $data['current_password']) {
                         $this->userConfirmedPassword();
                     }

@@ -2,14 +2,14 @@
 
 namespace WyChoong\FilamentFortify\Pages\Concerns;
 
-use Laravel\Fortify\Features;
-use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Laravel\Fortify\Actions\GenerateNewRecoveryCodes;
-use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Actions\ConfirmTwoFactorAuthentication;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
+use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
+use Laravel\Fortify\Actions\GenerateNewRecoveryCodes;
+use Laravel\Fortify\Features;
 
 trait ActionButtons
 {

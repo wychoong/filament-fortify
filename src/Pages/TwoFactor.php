@@ -2,15 +2,13 @@
 
 namespace WyChoong\FilamentFortify\Pages;
 
-use Filament\Pages\Page;
-use Laravel\Fortify\Features;
 use Filament\Facades\Filament;
+use Filament\Pages\Page;
 use Illuminate\Support\Facades\Auth;
-
-use Filament\Forms\Concerns\InteractsWithForms;
-use WyChoong\FilamentFortify\Facades\FilamentFortify;
-use WyChoong\FilamentFortify\Pages\Concerns;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
+
+use Laravel\Fortify\Features;
+use WyChoong\FilamentFortify\Facades\FilamentFortify;
 
 class TwoFactor extends Page
 {
@@ -69,6 +67,6 @@ class TwoFactor extends Page
      */
     private function showTwoFactor(): bool
     {
-        return !empty(Auth::user()->two_factor_secret);
+        return ! empty(Auth::user()->two_factor_secret);
     }
 }
