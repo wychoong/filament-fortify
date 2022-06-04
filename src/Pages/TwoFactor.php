@@ -70,6 +70,6 @@ class TwoFactor extends Page
      */
     private function showTwoFactor(): bool
     {
-        return !empty(Auth::user()->two_factor_secret);
+        return ! empty(Auth::user()->two_factor_secret);
     }
 }
