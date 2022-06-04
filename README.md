@@ -202,7 +202,7 @@ return [
 ### Render hooks
 Make use of Filament's render hook to register additional content without publishing views.
 
-
+Example with [Filament-Socialite](https://github.com/DutchCodingCompany/filament-socialite)
 ```php
 ## in Service Provider file
 public function boot()
