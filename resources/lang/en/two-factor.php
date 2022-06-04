@@ -5,10 +5,19 @@ return [
 
     'heading' => 'Reset password',
 
+    'confirm-password' => [
+        'modal-heading' => "Sensitive action",
+        'modal-subheading' => "Please confirm your password before proceed this action.",
+    ],
+
     'buttons' => [
 
         'enable' => [
             'label' => 'Enable two factor auth',
+        ],
+
+        'confirm' => [
+            'label' => 'Enable',
         ],
 
         'disable' => [
@@ -17,7 +26,16 @@ return [
 
         'regenerate' => [
             'label' => 'Regenerate recovery code',
-        ]
+        ],
+
+        'show-recovery-code' => [
+            'label' => 'Show recovery code',
+        ],
+
+    ],
+
+    'label' => [
+        'setup-key' => 'Setup key',
     ],
 
     'fields' => [
@@ -32,13 +50,22 @@ return [
         'password_confirm' => [
             'label' => 'Confirm password',
         ],
+
+        'code' => [
+            'label' => 'OTP code',
+        ],
+
+        'current_password' => [
+            'label' => 'Password',
+        ]
     ],
 
     'messages' => [
         'throttled' => 'Too many register attempts. Please try again in :seconds seconds.',
         'enabled' => 'Two factor authentication has been enabled',
-        'scan-qr' => 'Scan the following QR code using your phone\'s authenticator application',
+        'scan-qr' => 'Scan the following QR code using your phone\'s authenticator application or enter the setup key.',
         'store-recovery-code' => 'Store these recovery codes in a secure place to recover access to your account if your two factor authentication device is lost.',
+        'confirm-two-factor-code' => 'Confirm the two factor code by entering the OTP code from the authenticator application',
     ],
 
     'login' => [
