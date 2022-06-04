@@ -68,8 +68,8 @@ class Register extends Component implements HasForms
     public function render(): View
     {
         return view('filament-fortify::register')
-            ->layout('filament::components.layouts.base', [
-                'title' => __('filament-fortify::register.title'),
+            ->layout('filament::components.layouts.card', [
+                'title' => __('filament-fortify::register.heading'),
             ]);
     }
 

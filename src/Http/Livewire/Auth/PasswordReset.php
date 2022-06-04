@@ -63,8 +63,8 @@ class PasswordReset extends Component implements HasForms
     public function render(): View
     {
         return view('filament-fortify::password-reset')
-            ->layout('filament::components.layouts.base', [
-                'title' => __('filament-fortify::password-reset.title'),
+            ->layout('filament::components.layouts.card', [
+                'title' => __('filament-fortify::password-reset.heading'),
             ]);
     }
 }

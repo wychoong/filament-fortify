@@ -33,8 +33,8 @@ class LoginTwoFactor extends Component implements HasForms
     public function render(): View
     {
         return view('filament-fortify::login-two-factor')
-            ->layout('filament::components.layouts.base', [
-                'title' => __('filament-fortify::two-factor.login.title'),
+            ->layout('filament::components.layouts.card', [
+                'title' => __('filament-fortify::two-factor.login.heading'),
             ]);
     }
 }
