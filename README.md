@@ -199,6 +199,27 @@ return [
 ];
 ```
 
+### Render hooks
+Make use of Filament's render hook to register additional content without publishing views.
+
+
+```php
+## in Service Provider file
+public function boot()
+{
+    Filament::registerRenderHook(
+        'filament-fortify.login.end',
+        fn (): string => Blade::render('@livewire(\'filament-socialite.buttons\')'),
+    );
+}
+```
+
+![Screenshot of hook for socialite](https://user-images.githubusercontent.com/67364036/171989863-67e10be6-6619-4bb0-b258-2fd64edecc00.png)
+
+Available hooks
+- filament-fortify.login.start
+- filament-fortify.login.end
+
 ## Testing
 
 ```bash
