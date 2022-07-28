@@ -35,7 +35,7 @@ trait HasActionButtons
             ->toArray();
     }
 
-    protected function getCachedAction(string $name): ?Action
+    public function getCachedAction(string $name): ?Action
     {
         return $this->getCachedButtons()[$name] ?? parent::getCachedAction($name);
     }
