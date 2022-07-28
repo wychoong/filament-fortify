@@ -2,6 +2,10 @@
 
 All notable changes to `filament-fortify` will be documented in this file.
 
+## release v0.3.1 - 2022-07-28
+
+- Fix compatibility with latest filament versions #12
+
 ## 2fa confirm enable flow - 2022-06-04
 
 - add 2fa confirm enable flow
