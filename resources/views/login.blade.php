@@ -6,7 +6,7 @@
                 {{__('filament-fortify::register.or')}}
                 <x-tables::link href="{{route('register')}}" >
                     {{ __('filament-fortify::register.login-link') }}
-                </x-table::link>
+                </x-tables::link>
             </p>
         @endif
 
@@ -21,7 +21,7 @@
 
         @if ($resetPasswordEnabled)
             <div class="text-center">
-                <x-tables::link href="{{route('password.request')}}" >{{__('filament-fortify::password-reset.buttons.request.label')}}</x-table::link>
+                <x-tables::link href="{{route('password.request')}}" >{{__('filament-fortify::password-reset.buttons.request.label')}}</x-tables::link>
             </div>
         @endif
 
