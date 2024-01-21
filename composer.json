@@ -1,6 +1,7 @@
 {
     "name": "wychoong/filament-fortify",
     "description": "Laravel Fortify for Filament Admin",
+    "version": "1.0.0",
     "keywords": [
         "wychoong",
         "laravel",
@@ -17,7 +18,7 @@
     ],
     "require": {
         "php": "^8.0|^8.1|^8.2",
-        "filament/filament": "^2.12.18",
+        "filament/filament": "^2.12.18|^3.2",
         "illuminate/contracts": "^9.0|^10.0",
         "laravel/fortify": "^1.11",
         "spatie/laravel-package-tools": "^1.9.2"
@@ -59,6 +60,6 @@
             }
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

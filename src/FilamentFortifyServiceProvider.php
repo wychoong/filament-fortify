@@ -2,7 +2,9 @@
 
 namespace WyChoong\FilamentFortify;
 
-use Filament\PluginServiceProvider;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
+
+use Livewire\Mechanisms\ComponentRegistry;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redirect;
@@ -18,8 +20,12 @@ use Spatie\LaravelPackageTools\Package;
 use WyChoong\FilamentFortify\Commands\FilamentFortifyCommand;
 use WyChoong\FilamentFortify\Http\Responses\LoginResponse;
 
-class FilamentFortifyServiceProvider extends PluginServiceProvider
+class FilamentFortifyServiceProvider extends PackageServiceProvider
 {
+
+    public static string $name = 'filament-fortify';
+
+
     public function configurePackage(Package $package): void
     {
         /*
@@ -50,10 +56,18 @@ class FilamentFortifyServiceProvider extends PluginServiceProvider
             'forms.dark_mode' => config('filament.dark_mode'),
         ]);
 
-        Livewire::component(config('filament-fortify.auth.register')::getName(), config('filament-fortify.auth.register'));
-        Livewire::component(config('filament-fortify.auth.password-reset')::getName(), config('filament-fortify.auth.password-reset'));
-        Livewire::component(config('filament-fortify.auth.request-password-reset')::getName(), config('filament-fortify.auth.request-password-reset'));
-        Livewire::component(config('filament-fortify.pages.two-factor')::getName(), config('filament-fortify.pages.two-factor'));
+        $componentRegistry = app(ComponentRegistry::class);
+
+        $registerComponentName = $componentRegistry->getName(config('filament-fortify.auth.register'));
+        $passwordResetComponentName = $componentRegistry->getName(config('filament-fortify.auth.password-reset'));
+        $requestPasswordResetComponentName = $componentRegistry->getName(config('filament-fortify.auth.request-password-reset'));
+        $loginTwoFactorComponentName = $componentRegistry->getName(config('filament-fortify.auth.login-two-factor'));
+
+        Livewire::component($registerComponentName, config('filament-fortify.auth.register'));
+        Livewire::component($passwordResetComponentName, config('filament-fortify.auth.password-reset'));
+        Livewire::component($requestPasswordResetComponentName, config('filament-fortify.auth.request-password-reset'));
+        Livewire::component($loginTwoFactorComponentName, config('filament-fortify.auth.login-two-factor'));
+
 
         Fortify::loginView(function () {
             return app()->call(config('filament-fortify.auth.login'));
